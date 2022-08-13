@@ -1,7 +1,7 @@
 {
 	"name": "daisy-lite",
 	"description": "it help you you file structure faster",
-	"version": "0.0.4",
+	"version": "0.0.7",
 	"license": "MIT",
 	"bin": {
 		"daisy": "index.js",
@@ -18,7 +18,8 @@
 	],
 	"files": [
 		"index.js",
-		"utils"
+		"utils",
+		"app"
 	],
 	"scripts": {
 		"format": "prettier --write \"./**/*.{js,json}\""
@@ -30,6 +31,7 @@
 		"cli-handle-unhandled": "^1.1.1",
 		"cli-meow-help": "^3.1.0",
 		"cli-welcome": "^2.2.2",
+		"daisy-lite": "^0.0.5",
 		"inquirer": "^8.0.0",
 		"meow": "^9.0.0",
 		"nanospinner": "^1.1.0"

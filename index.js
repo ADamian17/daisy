@@ -5,7 +5,8 @@
  * @author Adonis D Martin <a>
  */
 
-const { init, cli, log, daisy } = require('./utils');
+const { init, cli, log } = require('./utils');
+const { daisy } = require('./app');
 
 const input = cli.input;
 const flags = cli.flags;

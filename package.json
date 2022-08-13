@@ -1,7 +1,7 @@
 {
 	"name": "daisy-cli-lite",
 	"description": "it help you you file structure faster",
-	"version": "0.0.1",
+	"version": "0.0.4",
 	"license": "MIT",
 	"bin": {
 		"daisy": "index.js",

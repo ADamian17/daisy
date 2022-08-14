@@ -1,6 +1,9 @@
 const { mkdirSync, writeFileSync } = require('fs');
 const inquirer = require('inquirer');
+const welcome = require('cli-welcome');
 const BaseFile = require('./BaseFile');
+const { waitForIt } = require('../utils');
+const { createSpinner } = require('nanospinner');
 
 class Component extends BaseFile {
 	constructor(baseDir) {
@@ -21,22 +24,16 @@ class Component extends BaseFile {
 		};
 	}
 
-	generateFileContent(stylesFilePath = '') {
-		return `
-    import React from "react";
-    ${stylesFilePath}
+	generateFileContent(extension, stylesFilePath = '') {
+		const contentOptions = {
+			ts: `import React from "react";\n\n${stylesFilePath}\n\ntype ${this.fileName}Type = {};\n\nconst ${this.fileName}: React.FC<${this.fileName}Type> =(props) => {\n  return <div>${this.fileName}</div>\n}\n\nexport default ${this.fileName};`,
+			js: `import React from "react";\n\n${stylesFilePath}\n\nconst ${this.fileName} = (props) => {\n  return <div>${this.fileName}</div>\n}\n\nexport default ${this.fileName};`
+		};
 
-    type ${this.fileName}Type = {};
-
-    const ${this.fileName}: React.FC<${this.fileName}Type> = (props) => {
-      return <div>${this.fileName}</div>
-    }
-
-    export default ${this.fileName};
-    `;
+		return contentOptions[extension];
 	}
 
-	async generateFiles(isValidPath, extension = 'ts') {
+	async generateFiles(isValidPath, extension = 'js') {
 		if (!isValidPath) {
 			mkdirSync(`${this.baseDirPath}/${this.fileName}`);
 
@@ -45,11 +42,14 @@ class Component extends BaseFile {
 				type: 'confirm',
 				message: 'Do you want a css module file'
 			});
+			const createFileSpinner = createSpinner(
+				'...creating your files'
+			).start();
 
 			const styleFileData = this.generateStyleFile(
 				cssModulesPrompt.withModules
 			);
-
+			await waitForIt();
 			writeFileSync(
 				`${this.baseDirPath}/${this.fileName}/${styleFileData.file}`,
 				''
@@ -57,8 +57,12 @@ class Component extends BaseFile {
 
 			writeFileSync(
 				`${this.baseDirPath}/${this.fileName}/index.${extension}x`,
-				this.generateFileContent(styleFileData.importPath)
+				this.generateFileContent(extension, styleFileData.importPath)
 			);
+			createFileSpinner.success();
+			createFileSpinner.success({
+				text: 'done ✨'
+			});
 		} else {
 			console.log('\nfile already exits');
 		}

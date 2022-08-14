@@ -3,7 +3,7 @@ const { createSpinner } = require('nanospinner');
 const { waitForIt } = require('../utils');
 
 const validateBaseDirPath = async path => {
-	const spinner = createSpinner('...checking path').start();
+	const spinner = createSpinner('...checking base path').start();
 	await waitForIt();
 
 	if (existsSync(path)) {
@@ -19,7 +19,7 @@ const validateBaseDirPath = async path => {
 };
 
 const validateNestedDirPath = async path => {
-	const spinner = createSpinner('...checking path').start();
+	const spinner = createSpinner('...checking file path').start();
 	await waitForIt();
 
 	if (existsSync(path)) {

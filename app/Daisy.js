@@ -4,10 +4,12 @@ const {
 	validateNestedDirPath
 } = require('./pathValidator');
 const mainDirPaths = require('./mainDirPath');
+const { createUserChoiceMap } = require('../utils');
 
 class Daisy {
 	async generate(userChoice) {
-		const current = mainDirPaths.get(userChoice);
+		const userChoiceMap = createUserChoiceMap(userChoice);
+		const current = mainDirPaths.get(userChoiceMap.get('task'));
 		const baseDirPath = current?.baseDirPath;
 		const isValidPath = await validateBaseDirPath(baseDirPath);
 
@@ -24,7 +26,10 @@ class Daisy {
 				`${baseDirPath}/${fileName}`
 			);
 
-			current?.generateFiles(isValidFilePath);
+			current?.generateFiles(
+				isValidFilePath,
+				userChoiceMap.get('extension')
+			);
 		}
 	}
 }

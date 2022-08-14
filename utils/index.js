@@ -1,6 +1,6 @@
 module.exports = {
 	cli: require('./cli'),
-	...require('./functs'),
+	...require('./helpers'),
 	init: require('./init'),
 	log: require('./log')
 };

@@ -1,4 +1,4 @@
-const { toCapitalize } = require('../utils');
+const { toCapitalize, toCamelCase } = require('../utils');
 
 class BaseFile {
 	constructor(baseDir) {
@@ -7,7 +7,7 @@ class BaseFile {
 	}
 
 	setFileName(fileName) {
-		this.fileName = toCapitalize(fileName);
+		this.fileName = toCamelCase(fileName);
 
 		return this.fileName;
 	}

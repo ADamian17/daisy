@@ -15,7 +15,7 @@ const { clear, debug } = flags;
 (async () => {
 	init({ clear });
 	input.includes(`help`) && cli.showHelp(0);
-	const userChoice = input[0];
+	const userChoice = input.length === 0 ? null : input;
 
 	if (!userChoice) {
 		return console.log('Please run `daisy help` to see all option');

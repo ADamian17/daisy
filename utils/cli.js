@@ -26,9 +26,9 @@ const flags = {
 	},
 	component: {
 		type: `string`,
-		default: 'ts',
+		default: 'js',
 		alias: 'e',
-		desc: `what extension do you want? [ts|js]`
+		desc: `what extension do you want? [js|ts]`
 	}
 };
 

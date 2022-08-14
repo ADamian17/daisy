@@ -26,9 +26,15 @@ const flags = {
 	},
 	component: {
 		type: `string`,
-		default: 'js',
+		default: 'ts',
 		alias: 'e',
-		desc: `what extension do you want? [js|ts]`
+		desc: `Set extension for files [ts|js]`
+	},
+	container: {
+		type: `string`,
+		default: 'ts',
+		alias: 'e',
+		desc: `Set extension for files [ts|js]`
 	}
 };
 

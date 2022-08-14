@@ -1,17 +1,17 @@
 const { mkdirSync, writeFileSync } = require('fs');
 const inquirer = require('inquirer');
-const welcome = require('cli-welcome');
 const BaseFile = require('./BaseFile');
-const { waitForIt } = require('../utils');
+const { waitForIt, toCamelCase } = require('../utils');
 const { createSpinner } = require('nanospinner');
 
-class Component extends BaseFile {
+class Container extends BaseFile {
 	constructor(baseDir) {
 		super(baseDir);
+		this.containerFileName = '';
 	}
 
 	generateStyleFile(withCssModules) {
-		const file = `${this.fileName}.${
+		const file = `${this.containerFileName}.${
 			!withCssModules ? 'scss' : 'module.scss'
 		}`;
 		const importPath = !withCssModules
@@ -26,8 +26,8 @@ class Component extends BaseFile {
 
 	generateFileContent(extension, stylesFilePath = '') {
 		const contentOptions = {
-			ts: `import React from "react";\n\n${stylesFilePath}\n\ntype ${this.fileName}Type = {};\n\nconst ${this.fileName}: React.FC<${this.fileName}Type> =(props) => {\n  return <div>${this.fileName}</div>\n}\n\nexport default ${this.fileName};`,
-			js: `import React from "react";\n\n${stylesFilePath}\n\nconst ${this.fileName} = (props) => {\n  return <div>${this.fileName}</div>\n}\n\nexport default ${this.fileName};`
+			ts: `import React from "react";\n\n${stylesFilePath}\n\ntype ${this.containerFileName}Type = {};\n\nconst ${this.containerFileName}: React.FC<${this.containerFileName}Type> =(props) => {\n  return <div>${this.containerFileName}</div>\n}\n\nexport default ${this.containerFileName};`,
+			js: `import React from "react";\n\n${stylesFilePath}\n\nconst ${this.containerFileName} = (props) => {\n  return <div>${this.containerFileName}</div>\n}\n\nexport default ${this.containerFileName};`
 		};
 
 		return contentOptions[extension];
@@ -35,7 +35,8 @@ class Component extends BaseFile {
 
 	async generateFiles(isValidPath, extension = 'ts') {
 		if (!isValidPath) {
-			mkdirSync(`${this.baseDirPath}/${this.fileName}`);
+			this.containerFileName = `${this.fileName}Container`;
+			mkdirSync(`${this.baseDirPath}/${this.containerFileName}`);
 
 			const cssModulesPrompt = await inquirer.prompt({
 				name: 'withModules',
@@ -51,12 +52,12 @@ class Component extends BaseFile {
 			);
 			await waitForIt();
 			writeFileSync(
-				`${this.baseDirPath}/${this.fileName}/${styleFileData.file}`,
+				`${this.baseDirPath}/${this.containerFileName}/${styleFileData.file}`,
 				''
 			);
 
 			writeFileSync(
-				`${this.baseDirPath}/${this.fileName}/index.${extension}x`,
+				`${this.baseDirPath}/${this.containerFileName}/index.${extension}x`,
 				this.generateFileContent(extension, styleFileData.importPath)
 			);
 			createFileSpinner.success();
@@ -69,4 +70,4 @@ class Component extends BaseFile {
 	}
 }
 
-module.exports = Component;
+module.exports = Container;

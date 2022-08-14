@@ -1,4 +1,4 @@
-const { toCapitalize, toCamelCase } = require('../utils');
+const { toCamelCase } = require('../utils');
 
 class BaseFile {
 	constructor(baseDir) {

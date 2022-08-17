@@ -16,8 +16,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - uses: actions/setup-node@v3
       - name: "Install Dependencies"
-      - run: yarn install
+        run: yarn install
       - name: "Run test"
-      - run: yarn test
+        run: yarn test

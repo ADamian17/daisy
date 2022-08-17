@@ -1,7 +1,7 @@
 {
 	"name": "daisy-lite",
 	"description": "it help you you file structure faster",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"license": "MIT",
 	"bin": {
 		"daisy": "index.js",

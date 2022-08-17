@@ -16,6 +16,12 @@ const toCamelCase = str => {
 		.join('');
 };
 
+const toKebabCase = str => {
+	if (str.split(' ').length === 1) return str;
+
+	return str.toLowerCase().split(' ').join('-');
+};
+
 const createUserChoiceMap = (userChoices = []) => {
 	if (typeof userChoices === 'undefined') return;
 	const userChoicesMap = new Map();
@@ -29,5 +35,6 @@ module.exports = {
 	waitForIt,
 	toCapitalize,
 	toCamelCase,
+	toKebabCase,
 	createUserChoiceMap
 };

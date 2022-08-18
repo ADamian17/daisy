@@ -1,4 +1,4 @@
-![tests status](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+![tests status](https://github.com/ADamian17/daisy/actions/workflows/main.yml/badge.svg)
 
 <h1>Daisy</h1>
 

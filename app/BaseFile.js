@@ -1,4 +1,4 @@
-const { toCamelCase } = require('../utils');
+const { toCamelCase, toPascalCase, toKebabCase } = require('../utils');
 
 class BaseFile {
 	constructor(baseDir) {
@@ -7,7 +7,9 @@ class BaseFile {
 	}
 
 	setFileName(fileName) {
-		this.fileName = toCamelCase(fileName);
+		this.fileName = this.baseDirPath.includes(`templates`)
+			? `${toKebabCase(fileName)}-template`
+			: toPascalCase(fileName);
 
 		return this.fileName;
 	}

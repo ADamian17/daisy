@@ -8,9 +8,30 @@ const toCapitalize = str => {
 };
 
 const toCamelCase = str => {
-	if (str.split(' ').length === 1) return toCapitalize(str);
+	if (str.split(' ').length === 1) return str;
 
 	return str
+		.split(' ')
+		.map((item, idx) => {
+			if (idx <= 0) {
+				return item.toLowerCase();
+			}
+
+			return toCapitalize(item);
+		})
+		.join('');
+};
+
+const toPascalCase = str => {
+	const s = str.replace(/[`~!@#$%^&*()_|+\=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+	const containsSpecialCharacters = s.includes('-');
+	const formatedStr = containsSpecialCharacters
+		? s.replaceAll('-', ' ')
+		: str;
+
+	if (formatedStr.split(' ').length === 1) return toCapitalize(str);
+
+	return formatedStr
 		.split(' ')
 		.map(item => toCapitalize(item))
 		.join('');
@@ -32,9 +53,10 @@ const createUserChoiceMap = (userChoices = []) => {
 };
 
 module.exports = {
-	waitForIt,
-	toCapitalize,
+	createUserChoiceMap,
 	toCamelCase,
+	toCapitalize,
 	toKebabCase,
-	createUserChoiceMap
+	toPascalCase,
+	waitForIt
 };

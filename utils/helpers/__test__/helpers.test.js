@@ -1,4 +1,4 @@
-const { toCapitalize, toCamelCase, toKebabCase } = require('..');
+const { toCapitalize, toCamelCase, toKebabCase, toPascalCase } = require('..');
 
 describe('toCapitalize', () => {
 	it('should return Button', () => {
@@ -10,9 +10,21 @@ describe('toCapitalize', () => {
 
 describe('toCamelCase', () => {
 	it('should return MainButton', () => {
-		expect(toCamelCase('main button')).toBe('MainButton');
-		expect(toCamelCase('Main Button')).toBe('MainButton');
-		expect(toCamelCase('MAIN BUTTON')).toBe('MainButton');
+		expect(toCamelCase('main')).toBe('main');
+		expect(toCamelCase('main button')).toBe('mainButton');
+		expect(toCamelCase('Main Button')).toBe('mainButton');
+		expect(toCamelCase('MAIN BUTTON')).toBe('mainButton');
+	});
+});
+
+describe('toPascalCase', () => {
+	it('should return MainButton', () => {
+		expect(toPascalCase('main')).toBe('Main');
+		expect(toPascalCase('main button')).toBe('MainButton');
+		expect(toPascalCase('Main Button')).toBe('MainButton');
+		expect(toPascalCase('MAIN BUTTON')).toBe('MainButton');
+		expect(toPascalCase('main-button')).toBe('MainButton');
+		expect(toPascalCase('mai@#$n-butt*&*on')).toBe('MainButton');
 	});
 });
 

@@ -1,8 +1,8 @@
 const { mkdirSync, writeFileSync } = require('fs');
 const inquirer = require('inquirer');
 const welcome = require('cli-welcome');
-const BaseFile = require('./BaseFile');
-const { waitForIt } = require('../utils');
+const BaseFile = require('../BaseFile');
+const { waitForIt } = require('../../utils');
 const { createSpinner } = require('nanospinner');
 
 class Component extends BaseFile {

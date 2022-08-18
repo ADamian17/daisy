@@ -1,7 +1,7 @@
 const { mkdirSync, writeFileSync } = require('fs');
 const inquirer = require('inquirer');
 const BaseFile = require('./BaseFile');
-const { waitForIt, toCamelCase } = require('../utils');
+const { waitForIt } = require('../utils');
 const { createSpinner } = require('nanospinner');
 
 class Container extends BaseFile {

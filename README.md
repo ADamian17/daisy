@@ -1,3 +1,5 @@
+![tests status](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+
 <h1>Daisy</h1>
 
 <ul>

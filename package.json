@@ -25,7 +25,8 @@
 	],
 	"scripts": {
 		"format": "prettier --write \"./**/*.{js,json}\"",
-		"test": "jest --watch"
+		"test": "jest",
+		"test:dev": "jest --watch"
 	},
 	"dependencies": {
 		"chalk": "^4.1.2",

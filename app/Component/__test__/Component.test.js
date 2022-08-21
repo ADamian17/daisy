@@ -4,16 +4,9 @@ const Component = require('..');
 const component = new Component('component');
 
 describe('Template', () => {
-	// beforeAll(() => {
-	// 	fs.mkdirSync('src');
-	// 	fs.mkdirSync('src/components');
-	// 	component.setFileName('button');
-	// });
-
-	// afterAll(done => {
-	// 	fs.rmSync('src', { recursive: true });
-	// 	done();
-	// });
+	beforeAll(() => {
+		component.setFileName('button');
+	});
 
 	test('templates dir should exists', () => {
 		expect(fs.existsSync('src/components')).toBeTruthy();

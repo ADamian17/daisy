@@ -4,16 +4,9 @@ const Template = require('..');
 const template = new Template('template');
 
 describe('Template', () => {
-	// beforeAll(() => {
-	// 	fs.mkdirSync('src');
-	// 	fs.mkdirSync('src/templates');
-	// 	template.setFileName('home');
-	// });
-
-	// afterAll(done => {
-	// 	fs.rmSync('src', { recursive: true });
-	// 	done();
-	// });
+	beforeAll(() => {
+		template.setFileName('home');
+	});
 
 	test('templates dir should exists', () => {
 		expect(fs.existsSync('src/templates')).toBeTruthy();

@@ -2,6 +2,10 @@
 
 <h1>Daisy</h1>
 
+<h3>Description</h3>
+<p>daisy makes your development easer, scaffolding some of the most repetitive task, like creating component, containers, templates, etc</p>
+
+<h3>Table of Content</h3>
 <ul>
   <li>
     <a href="#installation">Installation</a>
@@ -9,7 +13,7 @@
   <li>
     <a href="#installation">Usage</a>
   </li>
-</ul>  
+</ul> 
 
 <h3 id="installation">Installation</h3>
 

@@ -5,5 +5,6 @@ module.exports = {
 	toKebabCase: require('./toKebabCase'),
 	toPascalCase: require('./toPascalCase'),
 	waitForIt: require('./waitForit'),
-	mkdir: require('./mkdir')
+	mkdir: require('./mkdir'),
+	writeFile: require('./writeFile')
 };

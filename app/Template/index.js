@@ -1,16 +1,16 @@
-const { promisify } = require('util');
-const fs = require('fs');
 const { createSpinner } = require('nanospinner');
-
-const { toPascalCase } = require('../../utils');
+const { toPascalCase, toKebabCase, mkdir, writeFile } = require('../../utils');
 const BaseFile = require('../BaseFile');
-
-const mkdir = promisify(fs.mkdir);
-const writeFile = promisify(fs.writeFile);
 
 class Template extends BaseFile {
 	constructor(baseDir) {
 		super(baseDir);
+	}
+
+	setFileName(fileName) {
+		this.fileName = `${toKebabCase(fileName)}-template`;
+
+		return this.fileName;
 	}
 
 	generateFileContent(extension) {
@@ -26,25 +26,23 @@ class Template extends BaseFile {
 		return contentOptions[extension];
 	}
 
-	async generateFiles(isValidPath, extension = 'ts') {
-		if (!isValidPath) {
-			await mkdir(`${this.baseDirPath}/${this.fileName}`);
+	async generateFiles() {
+		await mkdir(this.baseDirPath, this.fileName);
+		await this.getPromptExtensionFile();
 
-			const createFileSpinner = createSpinner(
-				'...creating your files'
-			).start();
+		const createFileSpinner = createSpinner(
+			'...creating your files'
+		).start();
 
-			await writeFile(
-				`${this.baseDirPath}/${this.fileName}/index.${extension}x`,
-				this.generateFileContent(extension)
-			);
-			createFileSpinner.success();
-			createFileSpinner.success({
-				text: 'done ✨'
-			});
-		} else {
-			console.log('\nfile already exits');
-		}
+		await writeFile(
+			`${this.baseDirPath}/${this.fileName}/index.${this.fileExtension}x`,
+			this.generateFileContent(this.fileExtension)
+		);
+
+		createFileSpinner.success();
+		createFileSpinner.success({
+			text: 'done ✨'
+		});
 	}
 }
 

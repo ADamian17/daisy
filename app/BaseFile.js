@@ -13,20 +13,24 @@ class BaseFile {
 		this.fileName = '';
 	}
 
-	async validateFilePath() {
-		return await validateNestedDirPath(
-			`${this.baseDirPath}/${this.fileName}`
-		);
-	}
-
-	async getPromptFileName() {
+	async getPromptCssModules() {
 		const prompt = await inquirer.prompt({
-			name: 'fileName',
-			type: 'input',
-			message: 'Enter file name'
+			name: 'withCssModules',
+			type: 'confirm',
+			message: 'Are you using css modules?'
 		});
 
-		return prompt.fileName;
+		return prompt.withCssModules;
+	}
+
+	async getPromptCssFileContent() {
+		const prompt = await inquirer.prompt({
+			name: 'imports',
+			type: 'input',
+			message: 'Enter the path of css imports'
+		});
+
+		return prompt.imports ? `@import "${prompt.imports}";` : `@import "":`;
 	}
 
 	async getPromptExtensionFile() {
@@ -40,6 +44,16 @@ class BaseFile {
 		this.fileExtension = extension;
 
 		return this.fileExtension;
+	}
+
+	async getPromptFileName() {
+		const prompt = await inquirer.prompt({
+			name: 'fileName',
+			type: 'input',
+			message: 'Enter file name'
+		});
+
+		return prompt.fileName;
 	}
 
 	setFileName(fileName) {
@@ -56,6 +70,12 @@ class BaseFile {
 		if (isValidPath) return console.log('\nfile already exits');
 
 		await this.generateFiles();
+	}
+
+	async validateFilePath() {
+		return await validateNestedDirPath(
+			`${this.baseDirPath}/${this.fileName}`
+		);
 	}
 
 	generateFileContent(componentName, stylesFile) {}

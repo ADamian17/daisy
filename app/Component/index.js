@@ -1,9 +1,7 @@
-const { mkdirSync, writeFileSync } = require('fs');
 const inquirer = require('inquirer');
-const welcome = require('cli-welcome');
-const BaseFile = require('../BaseFile');
-const { waitForIt } = require('../../utils');
 const { createSpinner } = require('nanospinner');
+const { mkdir, writeFile } = require('../../utils');
+const BaseFile = require('../BaseFile');
 
 class Component extends BaseFile {
 	constructor(baseDir) {
@@ -33,39 +31,35 @@ class Component extends BaseFile {
 		return contentOptions[extension];
 	}
 
-	async generateFiles(isValidPath, extension = 'ts') {
-		if (!isValidPath) {
-			mkdirSync(`${this.baseDirPath}/${this.fileName}`);
+	async generateFiles() {
+		await mkdir(this.baseDirPath, this.fileName);
+		await this.getPromptExtensionFile();
+		const withCssModules = await this.getPromptCssModules();
+		const imports = await this.getPromptCssFileContent();
 
-			const cssModulesPrompt = await inquirer.prompt({
-				name: 'withModules',
-				type: 'confirm',
-				message: 'Do you want a css module file'
-			});
-			const createFileSpinner = createSpinner(
-				'...creating your files'
-			).start();
+		const createFileSpinner = createSpinner(
+			'...creating your files'
+		).start();
 
-			const styleFileData = this.generateStyleFile(
-				cssModulesPrompt.withModules
-			);
-			await waitForIt();
-			writeFileSync(
-				`${this.baseDirPath}/${this.fileName}/${styleFileData.file}`,
-				''
-			);
+		const styleFileData = this.generateStyleFile(withCssModules);
 
-			writeFileSync(
-				`${this.baseDirPath}/${this.fileName}/index.${extension}x`,
-				this.generateFileContent(extension, styleFileData.importPath)
-			);
-			createFileSpinner.success();
-			createFileSpinner.success({
-				text: 'done ✨'
-			});
-		} else {
-			console.log('\nfile already exits');
-		}
+		await writeFile(
+			`${this.baseDirPath}/${this.fileName}/${styleFileData.file}`,
+			imports
+		);
+
+		await writeFile(
+			`${this.baseDirPath}/${this.fileName}/index.${this.fileExtension}x`,
+			this.generateFileContent(
+				this.fileExtension,
+				styleFileData.importPath
+			)
+		);
+
+		createFileSpinner.success();
+		createFileSpinner.success({
+			text: 'done ✨'
+		});
 	}
 }
 

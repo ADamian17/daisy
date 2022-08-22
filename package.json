@@ -1,7 +1,7 @@
 {
 	"name": "daisy-cli-a",
 	"description": "daisy makes your development easer, scaffolding some of the most repetitive task, like creating component, containers, templates, etc",
-	"version": "0.0.2",
+	"version": "0.0.4",
 	"license": "MIT",
 	"bin": {
 		"daisy": "index.js",
@@ -22,7 +22,9 @@
 	"files": [
 		"index.js",
 		"utils",
-		"app"
+		"app",
+		"config",
+		"models"
 	],
 	"scripts": {
 		"format": "prettier --write \"./**/*.{js,json}\"",
@@ -38,14 +40,10 @@
 		"cli-welcome": "^2.2.2",
 		"inquirer": "^8.1.1",
 		"meow": "^9.0.0",
-		"nanospinner": "^1.1.0",
-		"rxjs": "^7.5.6",
-		"ts-node": "^10.9.1",
-		"typescript": "^4.7.4"
+		"nanospinner": "^1.1.0"
 	},
 	"devDependencies": {
 		"@types/inquirer": "^8.1.1",
-		"@types/node": "^18.7.3",
 		"jest": "^28.1.3",
 		"prettier": "^2.7.1"
 	}

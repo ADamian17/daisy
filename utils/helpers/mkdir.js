@@ -10,11 +10,15 @@ module.exports = async (base, nestedDir) => {
 			await mkdir(base);
 		}
 
-		if (fs.existsSync(base) && !fs.existsSync(nestedDir)) {
-			await mkdir(`${base}/${nestedDir}`);
+		if (typeof nestedDir !== 'undefined') {
+			if (fs.existsSync(base) && !fs.existsSync(nestedDir)) {
+				await mkdir(`${base}/${nestedDir}`);
+			}
+
+			return fs.existsSync(`${base}/${nestedDir}`);
 		}
 
-		return fs.existsSync(`${base}/${nestedDir}`);
+		return fs.existsSync(base);
 	} catch (error) {
 		switch (error) {
 			case 'missing-base':

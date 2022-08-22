@@ -6,5 +6,6 @@ module.exports = {
 	toPascalCase: require('./toPascalCase'),
 	waitForIt: require('./waitForit'),
 	mkdir: require('./mkdir'),
-	writeFile: require('./writeFile')
+	writeFile: require('./writeFile'),
+	...require('./pathValidator')
 };

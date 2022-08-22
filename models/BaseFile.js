@@ -1,16 +1,32 @@
 const inquirer = require('inquirer');
-const { Subject } = require('rxjs');
-const prompts = new Subject();
-inquirer.prompt(prompts);
+const { createSpinner } = require('nanospinner');
 
-const { toPascalCase } = require('../utils');
-const { validateNestedDirPath } = require('./pathValidator');
+const {
+	toPascalCase,
+	validateNestedDirPath,
+	writeFile,
+	mkdir
+} = require('../utils');
 
 class BaseFile {
 	constructor(baseDir) {
 		this.baseDirPath = `./src/${baseDir}s`;
 		this.fileExtension = 'ts';
 		this.fileName = '';
+		this.withGatsby = false;
+	}
+
+	async getPromptGatsby() {
+		const prompt = await inquirer.prompt({
+			name: 'withGatsby',
+			type: 'confirm',
+			message: 'Are you using Gatsby JS?'
+		});
+
+		const withGatsby = prompt.withGatsby ? true : false;
+		this.withGatsby = withGatsby;
+
+		return this.withGatsby;
 	}
 
 	async getPromptCssModules() {
@@ -30,7 +46,7 @@ class BaseFile {
 			message: 'Enter the path of css imports'
 		});
 
-		return prompt.imports ? `@import "${prompt.imports}";` : `@import "":`;
+		return prompt.imports ? `@import "${prompt.imports}";` : `@import "";`;
 	}
 
 	async getPromptExtensionFile() {
@@ -78,8 +94,52 @@ class BaseFile {
 		);
 	}
 
+	generateStyleFile(withCssModules) {
+		const file = `${this.fileName}.${
+			!withCssModules ? 'scss' : 'module.scss'
+		}`;
+		const importPath = !withCssModules
+			? `import "./${file}"`
+			: `import * as styles from "./${file}"`;
+
+		return {
+			file,
+			importPath
+		};
+	}
+
+	async generateFiles() {
+		await mkdir(this.baseDirPath, this.fileName);
+		await this.getPromptExtensionFile();
+		const withCssModules = await this.getPromptCssModules();
+		const imports = await this.getPromptCssFileContent();
+
+		const createFileSpinner = createSpinner(
+			'...creating your files'
+		).start();
+
+		const styleFileData = this.generateStyleFile(withCssModules);
+
+		await writeFile(
+			`${this.baseDirPath}/${this.fileName}/${styleFileData.file}`,
+			imports
+		);
+
+		await writeFile(
+			`${this.baseDirPath}/${this.fileName}/index.${this.fileExtension}x`,
+			this.generateFileContent(
+				this.fileExtension,
+				styleFileData.importPath
+			)
+		);
+
+		createFileSpinner.success();
+		createFileSpinner.success({
+			text: 'done ✨'
+		});
+	}
+
 	generateFileContent(componentName, stylesFile) {}
-	generateFiles(extension) {}
 }
 
 module.exports = BaseFile;

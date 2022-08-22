@@ -28,13 +28,21 @@ npm install daisy -g
 ```bash
 daisy help
 ```
-
 <p>The three main commands that daisy focus on are: </p>
 
-``daisy component:`` 
-
-<p>by running this command daisy will check if the components directory exist at: <code>src/components</code> and that the component that you want to create does not exist.</p> 
 
 ```bash
 daisy component
 ```
+<p>by running this command daisy will check if the components directory exists at: <code>src/components</code> and, also checks if the component that you want to create doesn't exists.</p> 
+
+
+```bash
+daisy container
+```
+<p>by running this command daisy will check if the containers directory exists at: <code>src/containers</code> and, also checks if the container that you want to create doesn't exists.</p>
+
+```bash
+daisy template
+```
+<p>by running this command daisy will check if the templates directory exists at: <code>src/templates</code> and, also checks if the template that you want to create doesn't exists.</p>

@@ -5,9 +5,9 @@ const Template = require('..');
 const template = new Template('template');
 
 describe('Template', () => {
-	beforeAll(() => {
-		fs.mkdirSync('src');
-		fs.mkdirSync('src/templates');
+	beforeAll(async () => {
+		await mkdir('src');
+		await mkdir('src', 'templates');
 		template.setFileName('home');
 	});
 

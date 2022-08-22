@@ -1,16 +1,26 @@
 const fs = require('fs');
 const { mkdir } = require('../../../utils');
+const Component = require('..');
 
-describe('Component', () => {
-	// beforeAll(async () => {
-	// 	await mkdir('src', 'components');
-	// });
-	// afterAll(() => {
-	// 	fs.rmSync('src', { recursive: true });
-	// });
-	// test('should', () => {
-	// 	expect(fs.existsSync('src/components')).toBeTruthy();
-	// });
+const component = new Component('component');
 
-	test('should ', () => {});
+describe('Template', () => {
+	beforeAll(async () => {
+		await mkdir('src');
+		await mkdir('src', 'components');
+		component.setFileName('button');
+	});
+
+	afterAll(done => {
+		fs.rmSync('src', { recursive: true });
+		done();
+	});
+
+	test('templates dir should exists', () => {
+		expect(fs.existsSync('src/components')).toBeTruthy();
+	});
+
+	it('should return home-template', () => {
+		expect(component.fileName).toBe('Button');
+	});
 });

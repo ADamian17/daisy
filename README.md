@@ -2,6 +2,10 @@
 
 <h1>Daisy</h1>
 
+<h3>Description</h3>
+<p>daisy makes your development easer, scaffolding some of the most repetitive task, like creating component, containers, templates, etc</p>
+
+<h3>Table of Content</h3>
 <ul>
   <li>
     <a href="#installation">Installation</a>
@@ -9,7 +13,7 @@
   <li>
     <a href="#installation">Usage</a>
   </li>
-</ul>  
+</ul> 
 
 <h3 id="installation">Installation</h3>
 
@@ -24,13 +28,21 @@ npm install daisy -g
 ```bash
 daisy help
 ```
-
 <p>The three main commands that daisy focus on are: </p>
 
-``daisy component:`` 
-
-<p>by running this command daisy will check if the components directory exist at: <code>src/components</code> and that the component that you want to create does not exist.</p> 
 
 ```bash
 daisy component
 ```
+<p>by running this command daisy will check if the components directory exists at: <code>src/components</code> and, also checks if the component that you want to create doesn't exists.</p> 
+
+
+```bash
+daisy container
+```
+<p>by running this command daisy will check if the containers directory exists at: <code>src/containers</code> and, also checks if the container that you want to create doesn't exists.</p>
+
+```bash
+daisy template
+```
+<p>by running this command daisy will check if the templates directory exists at: <code>src/templates</code> and, also checks if the template that you want to create doesn't exists.</p>

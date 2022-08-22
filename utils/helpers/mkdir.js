@@ -5,17 +5,20 @@ const mkdir = promisify(fs.mkdir);
 module.exports = async (base, nestedDir) => {
 	try {
 		if (!base) throw 'missing-base';
-		if (!nestedDir) throw 'missing-nestedDir';
 
 		if (!fs.existsSync(base)) {
 			await mkdir(base);
 		}
 
-		if (fs.existsSync(base) && !fs.existsSync(nestedDir)) {
-			await mkdir(`${base}/${nestedDir}`);
+		if (typeof nestedDir !== 'undefined') {
+			if (fs.existsSync(base) && !fs.existsSync(nestedDir)) {
+				await mkdir(`${base}/${nestedDir}`);
+			}
+
+			return fs.existsSync(`${base}/${nestedDir}`);
 		}
 
-		return fs.existsSync(`${base}/${nestedDir}`);
+		return fs.existsSync(base);
 	} catch (error) {
 		switch (error) {
 			case 'missing-base':

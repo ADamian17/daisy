@@ -1,10 +1,5 @@
-const inquirer = require('inquirer');
-const {
-	validateBaseDirPath,
-	validateNestedDirPath
-} = require('./pathValidator');
-const mainDirPaths = require('./mainDirPath');
-const { createUserChoiceMap } = require('../utils');
+const { createUserChoiceMap, validateBaseDirPath } = require('../utils');
+const { mainDirPaths } = require('../config');
 
 class Daisy {
 	async generate(userChoice) {
@@ -14,22 +9,9 @@ class Daisy {
 		const isValidPath = await validateBaseDirPath(baseDirPath);
 
 		if (isValidPath) {
-			const prompt = await inquirer.prompt({
-				name: 'fileName',
-				type: 'input',
-				message: 'Enter file name'
-			});
-
-			const fileName = current?.setFileName(prompt.fileName);
-
-			const isValidFilePath = await validateNestedDirPath(
-				`${baseDirPath}/${fileName}`
-			);
-
-			current?.generateFiles(
-				isValidFilePath,
-				userChoiceMap.get('extension')
-			);
+			current.taskInit();
+		} else {
+			process.exit();
 		}
 	}
 }

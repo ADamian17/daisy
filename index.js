@@ -17,11 +17,11 @@ const { clear, debug } = flags;
 	input.includes(`help`) && cli.showHelp(0);
 	const userChoice = input.length === 0 ? null : input;
 
+	debug && log(flags);
+
 	if (!userChoice) {
 		return console.log('Please run `daisy help` to see all option');
 	}
 
 	daisy.generate(userChoice);
-
-	debug && log(flags);
 })();

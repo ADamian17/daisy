@@ -18,7 +18,7 @@
 <h3 id="installation">Installation</h3>
 
 ```bash
-npm install daisy -g
+npm install daisy-cli-a -g
 ```
 
 <h3 id="installation">Usage</h3>

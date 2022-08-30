@@ -13,12 +13,12 @@
   <li>
     <a href="#installation">Usage</a>
   </li>
-</ul> 
+</ul>
 
 <h3 id="installation">Installation</h3>
 
 ```bash
-npm install daisy-cli-a -g
+npm install daisy-lite -g
 ```
 
 <h3 id="installation">Usage</h3>
@@ -28,21 +28,23 @@ npm install daisy-cli-a -g
 ```bash
 daisy help
 ```
-<p>The three main commands that daisy focus on are: </p>
 
+<p>The three main commands that daisy focus on are: </p>
 
 ```bash
 daisy component
 ```
-<p>by running this command daisy will check if the components directory exists at: <code>src/components</code> and, also checks if the component that you want to create doesn't exists.</p> 
 
+<p>by running this command daisy will check if the components directory exists at: <code>src/components</code> and, also checks if the component that you want to create doesn't exists.</p>
 
 ```bash
 daisy container
 ```
+
 <p>by running this command daisy will check if the containers directory exists at: <code>src/containers</code> and, also checks if the container that you want to create doesn't exists.</p>
 
 ```bash
 daisy template
 ```
+
 <p>by running this command daisy will check if the templates directory exists at: <code>src/templates</code> and, also checks if the template that you want to create doesn't exists.</p>

@@ -1,16 +1,18 @@
 const inquirer = require('inquirer');
 const { createSpinner } = require('nanospinner');
+const path = require('path');
 
 const {
 	toPascalCase,
 	validateNestedDirPath,
 	writeFile,
-	mkdir
+	mkdir,
+	log
 } = require('../utils');
 
 class BaseFile {
 	constructor(baseDir) {
-		this.baseDirPath = `./src/${baseDir}s`;
+		this.baseDirPath = this.setBaseDirPath('src', `${baseDir}s`);
 		this.fileExtension = 'ts';
 		this.fileName = '';
 		this.withGatsby = false;
@@ -72,13 +74,22 @@ class BaseFile {
 		return prompt.fileName;
 	}
 
+	setBaseDirPath(dir, target) {
+		return path.resolve(dir, target);
+	}
+
 	setFileName(fileName) {
 		this.fileName = toPascalCase(fileName);
 
 		return this.fileName;
 	}
 
-	async taskInit() {
+	async taskInit(nestedDir) {
+		if (this.baseDirPath.includes('components') && nestedDir) {
+			const tempBaseDir = this.baseDirPath;
+			this.baseDirPath = this.setBaseDirPath(tempBaseDir, nestedDir);
+		}
+
 		const fileName = await this.getPromptFileName();
 		this.setFileName(fileName);
 		const isValidPath = await this.validateFilePath(this.fileName);

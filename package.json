@@ -1,11 +1,10 @@
 {
 	"name": "daisy-lite",
 	"description": "daisy makes your development easer, scaffolding some of the most repetitive task, like creating component, containers, templates, etc",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"license": "MIT",
 	"bin": {
-		"daisy": "index.js",
-		"daisy-cli": "index.js"
+		"daisy": "index.js"
 	},
 	"private": false,
 	"author": {

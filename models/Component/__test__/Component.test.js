@@ -1,12 +1,13 @@
 const fs = require('fs');
 const Component = require('..');
+const { mkdir, testSetup } = require('../../../utils');
 
 const component = new Component('component');
 const fileName = 'button';
-const basePath = 'src/components';
 
 describe('Template', () => {
 	beforeAll(async () => {
+		await testSetup('components');
 		component.setFileName(fileName);
 	});
 

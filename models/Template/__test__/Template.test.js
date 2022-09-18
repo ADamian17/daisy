@@ -1,12 +1,13 @@
 const fs = require('fs');
 const Template = require('..');
+const { testSetup } = require('../../../utils');
 
 const template = new Template('template');
 let fileName;
-const basePath = 'src/templates';
 
 describe('Template', () => {
 	beforeAll(async () => {
+		await testSetup('templates');
 		fileName = template.setFileName('home');
 	});
 

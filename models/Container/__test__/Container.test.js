@@ -1,12 +1,13 @@
 const fs = require('fs');
 const Container = require('..');
+const { testSetup } = require('../../../utils');
 
 const container = new Container('container');
 const fileName = 'home';
-const basePath = 'src/containers';
 
 describe('Container', () => {
 	beforeAll(async () => {
+		await testSetup('containers');
 		container.setFileName(fileName);
 	});
 

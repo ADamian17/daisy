@@ -16,6 +16,7 @@ class BaseFile {
 		this.fileExtension = 'ts';
 		this.fileName = '';
 		this.withGatsby = false;
+		this.withJest = false;
 	}
 
 	async getPromptGatsby() {
@@ -29,6 +30,19 @@ class BaseFile {
 		this.withGatsby = withGatsby;
 
 		return this.withGatsby;
+	}
+
+	async getPromptJest() {
+		const prompt = await inquirer.prompt({
+			name: 'withJest',
+			type: 'confirm',
+			message: 'Are you using Jest?'
+		});
+
+		const withJest = prompt.withJest ? true : false;
+		this.withJest = withJest;
+
+		return this.withJest;
 	}
 
 	async getPromptCssModules() {
@@ -124,6 +138,11 @@ class BaseFile {
 		await this.getPromptExtensionFile();
 		const withCssModules = await this.getPromptCssModules();
 		const imports = await this.getPromptCssFileContent();
+		const withJest = await this.getPromptJest();
+
+		if (this.baseDirPath !== 'src/templates' && withJest) {
+			this.generateTestFile();
+		}
 
 		const createFileSpinner = createSpinner(
 			'...creating your files'
@@ -150,7 +169,25 @@ class BaseFile {
 		});
 	}
 
+	async generateTestFile() {
+		const baseDirPath = `${this.baseDirPath}/${this.fileName}`;
+		const testDirName = '__test__';
+
+		await mkdir(baseDirPath, testDirName);
+
+		await writeFile(
+			`${baseDirPath}/${testDirName}/${this.fileName}.test.${this.fileExtension}x`,
+			this.generateTestFileContent()
+		);
+	}
+
 	generateFileContent(componentName, stylesFile) {}
+
+	generateTestFileContent() {
+		const temp = `import React from "react";\n\nimport { render, screen } from "@testing-library/react";\n\nimport ${this.fileName} from ".."\n\nit('should render correctly', () => {\n render(${this.fileName});\n});`;
+
+		return temp;
+	}
 }
 
 module.exports = BaseFile;

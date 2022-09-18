@@ -1,19 +1,14 @@
 const fs = require('fs');
-const { mkdir } = require('../../../utils');
 const Component = require('..');
+const { mkdir, testSetup } = require('../../../utils');
 
 const component = new Component('component');
+const fileName = 'button';
 
 describe('Template', () => {
 	beforeAll(async () => {
-		await mkdir('src');
-		await mkdir('src', 'components');
-		component.setFileName('button');
-	});
-
-	afterAll(done => {
-		fs.rmSync('src', { recursive: true });
-		done();
+		await testSetup('components');
+		component.setFileName(fileName);
 	});
 
 	test('templates dir should exists', () => {

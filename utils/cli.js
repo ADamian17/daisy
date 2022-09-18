@@ -13,12 +13,6 @@ const flags = {
 		default: false,
 		desc: `Don't clear the console`
 	},
-	debug: {
-		type: `boolean`,
-		default: false,
-		alias: `d`,
-		desc: `Print debug info`
-	},
 	version: {
 		type: `boolean`,
 		alias: `v`,
@@ -27,14 +21,20 @@ const flags = {
 	component: {
 		type: `string`,
 		default: 'ts',
-		alias: 'e',
-		desc: `Set extension for files [ts|js]`
+		alias: 'comp',
+		desc: `Checks for the components directory and creates a component`
 	},
 	container: {
 		type: `string`,
 		default: 'ts',
-		alias: 'e',
-		desc: `Set extension for files [ts|js]`
+		alias: 'cont',
+		desc: `Checks for the containers directory and creates a container`
+	},
+	template: {
+		type: `string`,
+		default: 'ts',
+		alias: 'temp',
+		desc: `Checks for the templates directory and creates a template`
 	}
 };
 

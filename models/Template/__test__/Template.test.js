@@ -1,19 +1,13 @@
 const fs = require('fs');
-const { mkdir } = require('../../../utils');
 const Template = require('..');
 
 const template = new Template('template');
+let fileName;
+const basePath = 'src/templates';
 
 describe('Template', () => {
 	beforeAll(async () => {
-		await mkdir('src');
-		await mkdir('src', 'templates');
-		template.setFileName('home');
-	});
-
-	afterAll(done => {
-		fs.rmSync('src', { recursive: true });
-		done();
+		fileName = template.setFileName('home');
 	});
 
 	test('templates dir should exists', () => {

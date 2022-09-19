@@ -8,42 +8,34 @@ const flags = {
 		alias: `c`,
 		desc: `Clear the console`
 	},
-	noClear: {
-		type: `boolean`,
-		default: false,
-		desc: `Don't clear the console`
-	},
 	version: {
 		type: `boolean`,
 		alias: `v`,
 		desc: `Print CLI version`
 	},
-	component: {
-		type: `string`,
-		default: 'ts',
-		alias: 'comp',
-		desc: `Checks for the components directory and creates a component`
-	},
-	container: {
-		type: `string`,
-		default: 'ts',
-		alias: 'cont',
-		desc: `Checks for the containers directory and creates a container`
-	},
-	template: {
-		type: `string`,
-		default: 'ts',
-		alias: 'temp',
-		desc: `Checks for the templates directory and creates a template`
+	shared: {
+		type: `boolean`,
+		alias: 's',
+		desc: `Checks for the shared directory inside components dir and creates a component`,
+		default: false
 	}
 };
 
 const commands = {
+	component: {
+		desc: `Checks for the components directory and creates a component`
+	},
+	container: {
+		desc: `Checks for the containers directory and creates a container`
+	},
+	template: {
+		desc: `Checks for the templates directory and creates a template`
+	},
 	help: { desc: `Print help info` }
 };
 
 const helpText = meowHelp({
-	name: `daisy-cli`,
+	name: `daisy`,
 	flags,
 	commands
 });

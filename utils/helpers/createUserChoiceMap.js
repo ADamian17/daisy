@@ -1,12 +1,14 @@
-module.exports = (userChoices = []) => {
-	if (typeof userChoices === 'undefined') return;
-	const userChoicesMap = new Map();
-	userChoicesMap.set('task', userChoices[0]);
+const userChoiceMapType = require('../../config/userChoiceMapType');
 
-	const isSharedComponent =
-		userChoices[0] === 'component' && userChoices[1] === 'shared';
-	const nestedDir = isSharedComponent ? userChoices[1] : null;
-	userChoicesMap.set('nested-dir', nestedDir);
+module.exports = (userChoice, isShared) => {
+	if (typeof userChoice === 'undefined') return;
+
+	const userChoicesMap = new Map();
+	userChoicesMap.set(userChoiceMapType.TASK, userChoice);
+
+	if (userChoice === 'component' && isShared) {
+		userChoicesMap.set(userChoiceMapType.SHARED, 'shared');
+	}
 
 	return userChoicesMap;
 };

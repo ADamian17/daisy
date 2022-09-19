@@ -1,3 +1,4 @@
 module.exports = {
-	mainDirPaths: require('./mainDirPath')
+	mainDirPaths: require('./mainDirPath'),
+	userMapChoiceTypes: require('./userChoiceMapType')
 };

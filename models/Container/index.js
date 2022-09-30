@@ -15,7 +15,7 @@ class Container extends BaseFile {
 
 	generateFileContent(extension, stylesFilePath = '') {
 		const contentOptions = {
-			ts: `import React from "react";\n\n${stylesFilePath}\n\ntype ${this.fileName}Type = {};\n\nconst ${this.fileName}: React.FC<${this.fileName}Type> =(props) => {\n  return <div>${this.fileName}</div>\n}\n\nexport default ${this.fileName};`,
+			ts: `import React from "react";\n\n${stylesFilePath}\n\nexport type ${this.fileName}Type = {};\n\nconst ${this.fileName}: React.FC<${this.fileName}Type> =(props) => {\n  return <div>${this.fileName}</div>\n}\n\nexport default ${this.fileName};`,
 			js: `import React from "react";\n\n${stylesFilePath}\n\nconst ${this.fileName} = (props) => {\n  return <div>${this.fileName}</div>\n}\n\nexport default ${this.fileName};`
 		};
 

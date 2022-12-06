@@ -33,16 +33,6 @@ class BaseFile {
 		return this[target];
 	}
 
-	async getPromptCssModules() {
-		const prompt = await inquirer.prompt({
-			name: 'withCssModules',
-			type: 'confirm',
-			message: 'Are you using css modules?'
-		});
-
-		return prompt.withCssModules;
-	}
-
 	async getPromptCssFileContent() {
 		const prompt = await inquirer.prompt({
 			name: 'imports',
@@ -178,7 +168,7 @@ class BaseFile {
 	}
 
 	generateTestFileContent() {
-		const temp = `import React from "react";\n\nimport { render, screen } from "@testing-library/react";\n\nimport ${this.fileName} from ".."\n\nit('should render correctly', () => {\n render(${this.fileName});\n});`;
+		const temp = `import React from "react";\n\nimport { render, screen } from "@testing-library/react";\n\nimport ${this.fileName} from ".."\n\nit('should render correctly', () => {\n render(<${this.fileName} />);\n});`;
 
 		return temp;
 	}

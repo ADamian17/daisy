@@ -16,20 +16,20 @@ const flags = {
 	shared: {
 		type: `boolean`,
 		alias: 's',
-		desc: `Checks for the shared directory inside components dir and creates a component`,
+		desc: `Creates a component inside src/components/shared`,
 		default: false
 	}
 };
 
 const commands = {
 	component: {
-		desc: `Checks for the components directory and creates a component`
+		desc: `Creates a component inside src/components`
 	},
 	container: {
-		desc: `Checks for the containers directory and creates a container`
+		desc: `Creates a container inside src/containers`
 	},
 	template: {
-		desc: `Checks for the templates directory and creates a template`
+		desc: `Creates a template inside src/templates`
 	},
 	help: { desc: `Print help info` }
 };

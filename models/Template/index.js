@@ -30,7 +30,7 @@ class Template extends BaseFile {
 			: `${fileName}Type`;
 
 		const query =
-			'graphql`\n  query PageQuery($id: String!) {\n    wpPage(id: {eq: $id}){\n }\n}\n`';
+			'graphql`\n  query PageQuery($id: String!) {\n    wpPage(id: {eq: $id}){\n  }\n}\n`';
 
 		const gatsbyPageQuery = this.withGatsby
 			? `\n\nexport const query = ${query}`
@@ -47,7 +47,7 @@ class Template extends BaseFile {
 	async generateFiles() {
 		await mkdir(this.baseDirPath, this.fileName);
 		await this.getPromptExtensionFile();
-		await this.getPromptGatsby();
+		await this.getConfirmation('withGatsby');
 
 		const createFileSpinner = createSpinner(
 			'...creating your files'

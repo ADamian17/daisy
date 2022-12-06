@@ -6,8 +6,7 @@ const {
 	toPascalCase,
 	validateNestedDirPath,
 	writeFile,
-	mkdir,
-	log
+	mkdir
 } = require('../utils');
 
 class BaseFile {
@@ -15,44 +14,23 @@ class BaseFile {
 		this.baseDirPath = this.setBaseDirPath('src', `${baseDir}s`);
 		this.fileExtension = 'ts';
 		this.fileName = '';
+		this.withCssModules = false;
 		this.withGatsby = false;
 		this.withJest = false;
+		this.withStorybook = false;
 	}
 
-	async getPromptGatsby() {
+	async getConfirmation(target) {
 		const prompt = await inquirer.prompt({
-			name: 'withGatsby',
+			name: target,
 			type: 'confirm',
-			message: 'Are you using Gatsby JS?'
+			message: `Are you using ${target.substring(4)}?`
 		});
 
-		const withGatsby = prompt.withGatsby ? true : false;
-		this.withGatsby = withGatsby;
+		const temp = prompt[target] ? true : false;
+		this[target] = temp;
 
-		return this.withGatsby;
-	}
-
-	async getPromptJest() {
-		const prompt = await inquirer.prompt({
-			name: 'withJest',
-			type: 'confirm',
-			message: 'Are you using Jest?'
-		});
-
-		const withJest = prompt.withJest ? true : false;
-		this.withJest = withJest;
-
-		return this.withJest;
-	}
-
-	async getPromptCssModules() {
-		const prompt = await inquirer.prompt({
-			name: 'withCssModules',
-			type: 'confirm',
-			message: 'Are you using css modules?'
-		});
-
-		return prompt.withCssModules;
+		return this[target];
 	}
 
 	async getPromptCssFileContent() {
@@ -125,7 +103,7 @@ class BaseFile {
 		}`;
 		const importPath = !withCssModules
 			? `import "./${file}"`
-			: `import * as styles from "./${file}"`;
+			: `import styles from "./${file}"`;
 
 		return {
 			file,
@@ -136,9 +114,10 @@ class BaseFile {
 	async generateFiles() {
 		await mkdir(this.baseDirPath, this.fileName);
 		await this.getPromptExtensionFile();
-		const withCssModules = await this.getPromptCssModules();
+		const withCssModules = await this.getConfirmation('withCssModules');
 		const imports = await this.getPromptCssFileContent();
-		const withJest = await this.getPromptJest();
+		const withJest = await this.getConfirmation('with@testing/library');
+		const withStorybook = await this.getConfirmation('withStorybook');
 
 		if (this.baseDirPath !== 'src/templates' && withJest) {
 			this.generateTestFile();
@@ -163,6 +142,13 @@ class BaseFile {
 			)
 		);
 
+		if (this.baseDirPath !== 'src/templates' && withStorybook) {
+			await writeFile(
+				`${this.baseDirPath}/${this.fileName}/${this.fileName}.stories.${this.fileExtension}x`,
+				this.generateStorybookFileContent(this.fileExtension)
+			);
+		}
+
 		createFileSpinner.success();
 		createFileSpinner.success({
 			text: 'done ✨'
@@ -181,13 +167,24 @@ class BaseFile {
 		);
 	}
 
-	generateFileContent(componentName, stylesFile) {}
-
 	generateTestFileContent() {
-		const temp = `import React from "react";\n\nimport { render, screen } from "@testing-library/react";\n\nimport ${this.fileName} from ".."\n\nit('should render correctly', () => {\n render(${this.fileName});\n});`;
+		const temp = `import React from "react";\n\nimport { render, screen } from "@testing-library/react";\n\nimport ${this.fileName} from ".."\n\nit('should render correctly', () => {\n render(<${this.fileName} />);\n});`;
 
 		return temp;
 	}
+
+	generateStorybookFileContent(extension) {
+		const component = this.fileName;
+
+		const fileContent = {
+			js: `import React from "react";\n\nimport ${component} from '.';\n\nexport default {\n component: ${component}\n};\n\nconst Template = (args) => <${component} {...args} />;\n\n\nexport const Default = Template.bind({});\n\nDefault.args = {/* set you component props */};`,
+			ts: `import React from "react";\n\nimport { ComponentStory, ComponentMeta } from "@storybook/react";\n\nimport ${component}, {${component}Type} from '.';\n\nexport default {\n component: ${component}\n} as ComponentMeta<typeof ${component}>;\n\nconst Template: ComponentStory<typeof ${component}> = (args) => <${component} {...args} />;\n\n\nexport const Default = Template.bind({});\n\nDefault.args = {/* set you component props */};`
+		};
+
+		return fileContent[extension];
+	}
+
+	generateFileContent(componentName, stylesFile) {}
 }
 
 module.exports = BaseFile;

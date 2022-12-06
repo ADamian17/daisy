@@ -116,7 +116,7 @@ class BaseFile {
 		await this.getPromptExtensionFile();
 		const withCssModules = await this.getConfirmation('withCssModules');
 		const imports = await this.getPromptCssFileContent();
-		const withJest = await this.getConfirmation('withJest');
+		const withJest = await this.getConfirmation('with@testing/library');
 		const withStorybook = await this.getConfirmation('withStorybook');
 
 		if (this.baseDirPath !== 'src/templates' && withJest) {

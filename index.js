@@ -21,5 +21,6 @@ const { clear } = flags;
 		return console.log('Please run `daisy help` to see all option');
 	}
 
-	daisy.generate(userChoice[0], cli.flags);
+	log({ flags });
+	// daisy.generate(userChoice[0], cli.flags);
 })();

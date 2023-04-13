@@ -18,6 +18,18 @@ const flags = {
 		alias: 's',
 		desc: `Creates a component inside src/components/shared`,
 		default: false
+	},
+	typescript: {
+		type: `boolean`,
+		alias: 'ts',
+		desc: `Adds configuration for typescript`,
+		default: false
+	},
+	cssModules: {
+		type: `boolean`,
+		alias: 'css-m',
+		desc: `Adds configuration for css modules`,
+		default: false
 	}
 };
 

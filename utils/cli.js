@@ -27,8 +27,20 @@ const flags = {
 	},
 	cssModules: {
 		type: `boolean`,
-		alias: 'css-m',
+		alias: 'cm',
 		desc: `Adds configuration for css modules`,
+		default: false
+	},
+	storyBook: {
+		type: `boolean`,
+		alias: 'sb',
+		desc: `Adds configuration for story-book`,
+		default: false
+	},
+	testingLibrary: {
+		type: `boolean`,
+		alias: 'tl',
+		desc: `Adds configuration for @testing-library`,
 		default: false
 	}
 };

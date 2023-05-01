@@ -1,7 +1,4 @@
-const meow = require('meow');
-const meowHelp = require('cli-meow-help');
-
-const flags = {
+module.exports = {
 	clear: {
 		type: `boolean`,
 		default: false,
@@ -50,31 +47,3 @@ const flags = {
 		isMultiple: true
 	}
 };
-
-const commands = {
-	component: {
-		desc: `Creates a component inside src/components`
-	},
-	container: {
-		desc: `Creates a container inside src/containers`
-	},
-	template: {
-		desc: `Creates a template inside src/templates`
-	},
-	help: { desc: `Print help info` }
-};
-
-const helpText = meowHelp({
-	name: `daisy`,
-	flags,
-	commands
-});
-
-const options = {
-	inferType: true,
-	description: false,
-	hardRejection: false,
-	flags
-};
-
-module.exports = meow(helpText, options);

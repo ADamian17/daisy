@@ -1,6 +1,6 @@
 const { existsSync } = require('fs');
 const { createSpinner } = require('nanospinner');
-const waitForIt = require('./waitForit');
+const waitForIt = require('./waitForIt');
 
 const validateBaseDirPath = async path => {
 	const spinner = createSpinner('...checking base path').start();

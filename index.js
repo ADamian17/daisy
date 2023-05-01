@@ -5,7 +5,8 @@
  * @author Adonis D Martin <a>
  */
 
-const { init, cli, log } = require('./utils');
+const { log } = require('./utils');
+const { cli, init } = require('./core');
 const { daisy } = require('./app');
 
 const input = cli.input;
@@ -22,6 +23,5 @@ const { clear } = flags;
 	}
 
 	log({ flags });
-	log({ input });
 	// daisy.generate(userChoice[0], cli.flags);
 })();

@@ -1,13 +1,13 @@
 module.exports = {
 	createUserChoiceMap: require('./createUserChoiceMap'),
+	mkdir: require('./mkdir'),
+	rm: require('./rm'),
+	testSetup: require('./testSetup'),
 	toCamelCase: require('./toCamelCase'),
 	toCapitalize: require('./toCapitalize'),
 	toKebabCase: require('./toKebabCase'),
 	toPascalCase: require('./toPascalCase'),
-	waitForIt: require('./waitForit'),
-	mkdir: require('./mkdir'),
-	rm: require('./rm'),
+	waitForIt: require('./waitForIt'),
 	writeFile: require('./writeFile'),
-	testSetup: require('./testSetup'),
 	...require('./pathValidator')
 };

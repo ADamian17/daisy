@@ -27,7 +27,7 @@ const flags = {
 	},
 	cssModules: {
 		type: `boolean`,
-		alias: 'cm',
+		alias: 'cssmod',
 		desc: `Adds configuration for css modules`,
 		default: false
 	},
@@ -39,9 +39,15 @@ const flags = {
 	},
 	testingLibrary: {
 		type: `boolean`,
-		alias: 'tl',
+		alias: 'tstlib',
 		desc: `Adds configuration for @testing-library`,
 		default: false
+	},
+	rootDir: {
+		type: `string`,
+		alias: 'rd',
+		desc: `Creates the file in the target location, e.g (src/component/UI/Btn)`,
+		isMultiple: true
 	}
 };
 

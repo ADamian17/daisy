@@ -22,5 +22,6 @@ const { clear } = flags;
 	}
 
 	log({ flags });
+	log({ input });
 	// daisy.generate(userChoice[0], cli.flags);
 })();

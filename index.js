@@ -8,18 +8,20 @@
 const { init, cli, log } = require('./utils');
 const { daisy } = require('./app');
 
-const input = cli.input;
+const commands = cli.input;
 const flags = cli.flags;
 const { clear } = flags;
 
 (async () => {
 	init({ clear });
-	input.includes(`help`) && cli.showHelp(0);
-	const userChoice = input.length === 0 ? null : input;
+	console.log('help', flags.help);
+	flags.help && cli.showHelp(0);
+	const cmd = commands.at(0);
 
-	if (!userChoice) {
+	if (!cmd) {
 		return console.log('Please run `daisy help` to see all option');
 	}
 
-	daisy.generate(userChoice[0], cli.flags);
+	console.log({ cmd });
+	// daisy.generate(userChoice[0], cli.flags);
 })();

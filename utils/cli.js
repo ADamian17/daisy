@@ -1,5 +1,5 @@
 const meow = require('meow');
-const meowHelp = require('cli-meow-help');
+const helpText = require('./helpText');
 
 const flags = {
 	clear: {
@@ -13,11 +13,11 @@ const flags = {
 		alias: `v`,
 		desc: `Print CLI version`
 	},
-	shared: {
-		type: `boolean`,
-		alias: 's',
-		desc: `Creates a component inside src/components/shared`,
-		default: false
+	help: {
+		alias: 'h',
+		default: false,
+		desc: `Print daisy command line options`,
+		type: `boolean`
 	}
 };
 
@@ -30,11 +30,10 @@ const commands = {
 	},
 	template: {
 		desc: `Creates a template inside src/templates`
-	},
-	help: { desc: `Print help info` }
+	}
 };
 
-const helpText = meowHelp({
+const meowText = helpText({
 	name: `daisy`,
 	flags,
 	commands
@@ -47,4 +46,4 @@ const options = {
 	flags
 };
 
-module.exports = meow(helpText, options);
+module.exports = meow(meowText, options);

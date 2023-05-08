@@ -7,25 +7,23 @@ const { singleLineDivider } = require('../constants');
 const isNotFirst = require('../helpers/isNotFirst');
 
 module.exports = function setOpts(options) {
-	let opts = '';
+	const sortedOpts = Object.keys(options).sort();
+	const opts = sortedOpts.reduce((acc, opt, idx) => {
+		const item = options[opt];
 
-	for (const key in options) {
-		const opt = options[key];
+		let firstLine = idx > 0 ? yellow(`  --${opt},`) : yellow(` --${opt},`);
 
-		let firstLine = isNotFirst(options, key)
-			? yellow(`  --${key},`)
-			: yellow(` --${key},`);
-
-		opts =
-			opts +
+		acc =
+			acc +
 			format(
 				'%s',
 				firstLine,
-				`${yellow(`-${opt.shortFlag}`)}`,
-				` ${opt.desc}`,
+				`${yellow(`-${item.shortFlag}`)}`,
+				` ${item.desc}`,
 				singleLineDivider
 			);
-	}
+		return acc;
+	}, '');
 
 	return format(
 		'%s',

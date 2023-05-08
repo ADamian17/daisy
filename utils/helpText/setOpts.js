@@ -1,6 +1,6 @@
 /* External modules */
 const { format } = require('util');
-const { yellow } = require('chalk');
+const { yellow, dim, blueBright } = require('chalk');
 
 /* Internal modules */
 const { singleLineDivider } = require('../constants');
@@ -12,7 +12,15 @@ module.exports = function setOpts(options) {
 
 		let firstLine = idx > 0 ? yellow(`  --${opt},`) : yellow(` --${opt},`);
 
-		acc = acc + format('%s', firstLine, ` ${item.desc}`, singleLineDivider);
+		acc =
+			acc +
+			format(
+				'%s',
+				firstLine,
+				` ${item.desc},`,
+				` ${dim('by default:')} ${blueBright(item.default)}`,
+				singleLineDivider
+			);
 		return acc;
 	}, '');
 

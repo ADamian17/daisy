@@ -4,7 +4,8 @@ module.exports = {
 		desc: `Clear the console`,
 		type: `boolean`
 	},
-	v: {
+	version: {
+		default: false,
 		desc: `Print CLI version`,
 		type: `boolean`
 	},
@@ -14,13 +15,23 @@ module.exports = {
 		type: `boolean`
 	},
 	dir: {
-		default: '',
+		default: 'Not set',
 		desc: `Sets the location of the file`,
 		type: `string`
 	},
 	ts: {
-		default: false,
+		default: true,
 		desc: `Create the files with ts extension`,
+		type: `boolean`
+	},
+	cssMod: {
+		default: true,
+		desc: `Create the files with .module.css file extension`,
+		type: `boolean`
+	},
+	sass: {
+		default: true,
+		desc: `Create the files with .scss file extension`,
 		type: `boolean`
 	}
 };

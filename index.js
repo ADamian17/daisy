@@ -7,7 +7,6 @@
 
 const { init } = require('./utils');
 const cli = require('./core/cli');
-const commands = require('./commands');
 const generate = require('./core/generate');
 
 const command = cli.input;

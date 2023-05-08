@@ -1,8 +1,5 @@
-const path = require('path');
-
-const commands = require('../commands');
 const { validateBaseDirPath } = require('../utils');
-const { existsSync } = require('fs');
+const commands = require('../commands');
 const setBaseDir = require('../utils/helpers/setBaseDir');
 
 module.exports = async function generate(cmd, flags) {
@@ -12,7 +9,7 @@ module.exports = async function generate(cmd, flags) {
 		return console.log('Please run `daisy --help` to see all option');
 	}
 
-	const baseDirPath = setBaseDir(flags.baseDir, cmd);
+	const baseDirPath = setBaseDir(flags.dir, cmd);
 	const isValidPath = await validateBaseDirPath(baseDirPath);
 
 	if (isValidPath) {

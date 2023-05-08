@@ -4,7 +4,6 @@ const { yellow } = require('chalk');
 
 /* Internal modules */
 const { singleLineDivider } = require('../constants');
-const isNotFirst = require('../helpers/isNotFirst');
 
 module.exports = function setOpts(options) {
 	const sortedOpts = Object.keys(options).sort();
@@ -13,15 +12,7 @@ module.exports = function setOpts(options) {
 
 		let firstLine = idx > 0 ? yellow(`  --${opt},`) : yellow(` --${opt},`);
 
-		acc =
-			acc +
-			format(
-				'%s',
-				firstLine,
-				`${yellow(`-${item.shortFlag}`)}`,
-				` ${item.desc}`,
-				singleLineDivider
-			);
+		acc = acc + format('%s', firstLine, ` ${item.desc}`, singleLineDivider);
 		return acc;
 	}, '');
 

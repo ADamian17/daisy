@@ -5,8 +5,10 @@
  * @author Adonis D Martin <a>
  */
 
-const { init, cli } = require('./utils');
-const { daisy } = require('./app');
+const { init } = require('./utils');
+const cli = require('./core/cli');
+const commands = require('./commands');
+const generate = require('./core/generate');
 
 const command = cli.input;
 const flags = cli.flags;
@@ -14,7 +16,7 @@ const { clear } = flags;
 
 (async () => {
 	init({ clear });
-	flags.help && cli.showHelp(0);
+	flags.help && cli.showHelp(2);
 
 	const cmd = command.at(0);
 
@@ -22,5 +24,5 @@ const { clear } = flags;
 		return console.log('Please run `daisy --help` to see all option');
 	}
 
-	// daisy.generate(userChoice[0], cli.flags);
+	generate(cmd, cli.flags);
 })();

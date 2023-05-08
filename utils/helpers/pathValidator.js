@@ -4,15 +4,17 @@ const waitForIt = require('./waitForit');
 
 const validateBaseDirPath = async path => {
 	const spinner = createSpinner('...checking base path').start();
-	await waitForIt();
+	await waitForIt(500);
 
 	if (existsSync(path)) {
-		spinner.success();
+		spinner.success({
+			text: 'Base directory is valid'
+		});
 		return true;
 	} else {
 		spinner.stop();
 		spinner.error({
-			text: `${path} does not exits`
+			text: `${path} does not exists`
 		});
 		return false;
 	}

@@ -21,7 +21,7 @@ module.exports = function setOpts(options) {
 			format(
 				'%s',
 				firstLine,
-				`${yellow(`-${opt.alias}`)}`,
+				`${yellow(`-${opt.shortFlag}`)}`,
 				` ${opt.desc}`,
 				singleLineDivider
 			);

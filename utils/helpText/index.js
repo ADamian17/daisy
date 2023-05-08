@@ -21,7 +21,7 @@ module.exports = function helpText({
 		doubleLineDivider
 	);
 
-	const exampleStr = format(
+	const exampleOne = format(
 		'%s',
 		gray('$'),
 		green(name),
@@ -30,8 +30,19 @@ module.exports = function helpText({
 		`"This command will generate a component with ts file extension"`
 	);
 
+	const exampleTwo = format(
+		'%s',
+		gray('$'),
+		green(name),
+		cyan('component'),
+		yellow('--sass=false'),
+		`"This command will disable the creation of files extension with scss"`
+	);
+
+	const examples = `${exampleOne}${singleLineDivider}${exampleTwo}`;
+
 	const COMMANDS = setCmds(commands);
-	const EXAMPLE = format('%s', 'Example:', singleLineDivider, exampleStr);
+	const EXAMPLE = format('%s', 'Example:', singleLineDivider, examples);
 	const FLAGS = setOpts(flags);
 	const USAGE = format('%s', 'Usage:', singleLineDivider, usageStr);
 

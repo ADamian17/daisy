@@ -19,8 +19,14 @@ module.exports = {
 	baseDir: {
 		shortFlag: 'bd',
 		default: [],
-		desc: `Print daisy command line options`,
+		desc: `Sets the location of the file`,
 		type: `string`,
 		isMultiple: true
+	},
+	typescript: {
+		shortFlag: 'ts',
+		default: false,
+		desc: `Create the files with ts extension`,
+		type: `boolean`
 	}
 };

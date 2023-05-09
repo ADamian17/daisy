@@ -3,21 +3,24 @@ const { createSpinner } = require('nanospinner');
 const waitForIt = require('./waitForit');
 
 const validateBaseDirPath = async path => {
-	const spinner = createSpinner('...checking base path').start();
-	await waitForIt(500);
+	try {
+		const spinner = createSpinner('...checking base path').start();
+		await waitForIt(500);
+		const isValid = existsSync(path);
 
-	if (existsSync(path)) {
+		if (!isValid) {
+			spinner.stop();
+			spinner.error({
+				text: `${path} does not exists`
+			});
+			return false;
+		}
+
 		spinner.success({
 			text: 'Base directory is valid'
 		});
 		return true;
-	} else {
-		spinner.stop();
-		spinner.error({
-			text: `${path} does not exists`
-		});
-		return false;
-	}
+	} catch (error) {}
 };
 
 const validateNestedDirPath = async path => {

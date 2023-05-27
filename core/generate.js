@@ -15,7 +15,7 @@ module.exports = async function generate(cmd, flags) {
 			);
 		}
 
-		const baseDirPath = setBaseDir(flags.dir, cmd);
+		const baseDirPath = setBaseDir(cmd, flags.dir);
 		const isValidPath = await validateBaseDirPath(baseDirPath);
 
 		if (!isValidPath) throw new Error('path is not valid');

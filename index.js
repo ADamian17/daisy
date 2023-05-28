@@ -7,7 +7,7 @@
 
 const { init } = require('./utils');
 const cli = require('./core/cli');
-const generate = require('./core/generate');
+const run = require('./core/run');
 
 const command = cli.input;
 const flags = cli.flags;
@@ -23,5 +23,5 @@ const { clear } = flags;
 		return console.log('Please run `daisy --help` to see all option');
 	}
 
-	generate(cmd, cli.flags);
+	run(cmd, cli.flags);
 })();

@@ -2,6 +2,7 @@ const inquirer = require('inquirer');
 const setFilename = require('./setFilename');
 const { validateBaseDirPath, validateFilePath } = require('../utils');
 const createDirectory = require('./createDirectory');
+const createFile = require('./createFile');
 
 module.exports = class Command {
 	constructor() {
@@ -39,12 +40,27 @@ module.exports = class Command {
 	 */
 	async init({ cmd, path, flags }) {
 		try {
+			const { cssMod, ts, sass } = flags;
 			await this.#getFileName(cmd);
 			this.#setBasePath(`${path}/${this.fileName}`);
 
 			/* creating directory */
 			const dirExists = await createDirectory(this.basePath);
-			console.log({ dirExists });
+			if (dirExists) {
+				const file = {
+					name: this.fileName,
+					path: this.basePath,
+					content: `console.log("hello world")`
+				};
+
+				const fileOpts = {
+					cssMod,
+					ts,
+					sass
+				};
+
+				await createFile(file, fileOpts);
+			}
 		} catch (error) {
 			process.exit(0);
 		}

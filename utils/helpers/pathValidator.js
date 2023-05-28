@@ -5,7 +5,7 @@ const waitForIt = require('./waitForit');
 const validateBaseDirPath = async path => {
 	try {
 		const spinner = createSpinner('...checking base path').start();
-		await waitForIt(500);
+		await waitForIt(200);
 		const isValid = existsSync(path);
 
 		if (!isValid) {
@@ -20,7 +20,32 @@ const validateBaseDirPath = async path => {
 			text: 'Base directory is valid'
 		});
 		return true;
-	} catch (error) {}
+	} catch (error) {
+		process.exit(0);
+	}
+};
+
+const validateFilePath = async path => {
+	try {
+		const spinner = createSpinner('...checking file path').start();
+		await waitForIt(200);
+
+		if (!existsSync(path)) {
+			spinner.success({
+				text: 'File path is valid'
+			});
+
+			return true;
+		}
+
+		spinner.error({
+			text: `There is already a file with that name`
+		});
+
+		return false;
+	} catch (error) {
+		process.exit(0);
+	}
 };
 
 const validateNestedDirPath = async path => {
@@ -41,5 +66,6 @@ const validateNestedDirPath = async path => {
 
 module.exports = {
 	validateBaseDirPath,
-	validateNestedDirPath
+	validateNestedDirPath,
+	validateFilePath
 };

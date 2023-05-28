@@ -9,7 +9,7 @@ describe('toCapitalize', () => {
 });
 
 describe('toCamelCase', () => {
-	it('should return MainButton', () => {
+	it('should return mainButton', () => {
 		expect(toCamelCase('main')).toBe('main');
 		expect(toCamelCase('main button')).toBe('mainButton');
 		expect(toCamelCase('Main Button')).toBe('mainButton');

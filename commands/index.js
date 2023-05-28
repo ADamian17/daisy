@@ -1,10 +1,7 @@
+const component = require('./component');
+
 module.exports = new Map([
-	[
-		'component',
-		flags => {
-			console.log(flags);
-		}
-	],
+	['component', component],
 	[
 		'container',
 		flags => {

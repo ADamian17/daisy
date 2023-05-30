@@ -1,5 +1,4 @@
 module.exports = {
-	createUserChoiceMap: require('./createUserChoiceMap'),
 	waitForIt: require('./waitForit'),
 	mkdir: require('./mkdir'),
 	rm: require('./rm'),

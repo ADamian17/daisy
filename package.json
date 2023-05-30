@@ -24,9 +24,9 @@
 	"files": [
 		"index.js",
 		"utils",
-		"app",
-		"config",
-		"models"
+		"core",
+		"commands",
+		"helpers"
 	],
 	"scripts": {
 		"format": "prettier --write \"./**/*.{js,json}\"",

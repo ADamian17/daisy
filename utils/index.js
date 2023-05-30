@@ -1,5 +1,5 @@
 module.exports = {
-	cli: require('./cli'),
+	cli: require('../core/cli'),
 	init: require('./init'),
 	log: require('./log'),
 	...require('./helpers')

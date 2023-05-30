@@ -1,7 +1,7 @@
 {
 	"name": "daisy-lite",
 	"description": "daisy makes your development easer, scaffolding some of the most repetitive task, like creating component, containers, templates, etc",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"license": "MIT",
 	"bin": {
 		"daisy": "index.js"
@@ -35,9 +35,7 @@
 	"dependencies": {
 		"chalk": "^4.1.2",
 		"cli-alerts": "^1.2.2",
-		"cli-handle-error": "^4.4.0",
 		"cli-handle-unhandled": "^1.1.1",
-		"cli-meow-help": "^3.1.0",
 		"cli-welcome": "^2.2.2",
 		"inquirer": "^8.1.1",
 		"meow": "^9.0.0",

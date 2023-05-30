@@ -5,9 +5,12 @@ const createDirectory = require('./createDirectory');
 const createFile = require('./createFile');
 
 module.exports = class Command {
+	#basePath;
+	#fileName;
+
 	constructor() {
-		this.basePath = '';
-		this.fileName = '';
+		this.#basePath = '';
+		this.#fileName = '';
 	}
 	/**
 	 * @method setBasePath
@@ -16,7 +19,7 @@ module.exports = class Command {
 	#setBasePath(path) {
 		if (!path) throw new Error('Path is missing');
 
-		this.basePath = path;
+		this.#basePath = path;
 	}
 
 	async #getFileName(cmd) {
@@ -26,7 +29,7 @@ module.exports = class Command {
 			message: 'Enter file name'
 		});
 
-		this.fileName = setFilename(prompt.fileName, cmd);
+		this.#fileName = setFilename(prompt.fileName, cmd);
 	}
 
 	/**
@@ -40,23 +43,26 @@ module.exports = class Command {
 	 */
 	async init({ cmd, path, flags }) {
 		try {
-			const { cssMod, ts, sass } = flags;
+			const { cssMod, ts, sass, withStylesFile } = flags;
 			await this.#getFileName(cmd);
-			this.#setBasePath(`${path}/${this.fileName}`);
+			this.#setBasePath(`${path}/${this.#fileName}`);
 
 			/* creating directory */
-			const dirExists = await createDirectory(this.basePath);
+			const dirExists = await createDirectory(this.#basePath);
 			if (dirExists) {
+				const name = this.#fileName;
+				const path = this.#basePath;
+
 				const file = {
-					name: this.fileName,
-					path: this.basePath,
-					content: `console.log("hello world")`
+					name,
+					path
 				};
 
 				const fileOpts = {
 					cssMod,
 					ts,
-					sass
+					sass,
+					withStylesFile
 				};
 
 				await createFile(file, fileOpts);

@@ -15,8 +15,8 @@ module.exports = class StyleFile {
 	}
 
 	setImport() {
-		const withCssMod = `import styles from "./${this.file}"`;
-		const withoutCssMod = `import "./${this.file}"`;
+		const withCssMod = `import styles from "./${this.file}";`;
+		const withoutCssMod = `import "./${this.file}";`;
 
 		return this.cssMod ? withCssMod : withoutCssMod;
 	}

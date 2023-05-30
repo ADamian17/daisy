@@ -17,7 +17,7 @@ const { clear } = flags;
 	init({ clear });
 	flags.help && cli.showHelp(2);
 
-	const cmd = command.at(0);
+	const cmd = command[0];
 
 	if (!cmd) {
 		return console.log('Please run `daisy --help` to see all option');

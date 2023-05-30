@@ -3,7 +3,7 @@ const { format } = require('util');
 const { yellow, dim, blueBright } = require('chalk');
 
 /* Internal modules */
-const { singleLineDivider } = require('../constants');
+const { SINGLE_BR } = require('../constants');
 
 module.exports = function setOpts(options) {
 	const sortedOpts = Object.keys(options).sort();
@@ -19,15 +19,10 @@ module.exports = function setOpts(options) {
 				firstLine,
 				` ${item.desc},`,
 				` ${dim('by default:')} ${blueBright(item.default)}`,
-				singleLineDivider
+				SINGLE_BR
 			);
 		return acc;
 	}, '');
 
-	return format(
-		'%s',
-		`Options:${singleLineDivider}`,
-		opts,
-		singleLineDivider
-	);
+	return format('%s', `Options:${SINGLE_BR}`, opts, SINGLE_BR);
 };

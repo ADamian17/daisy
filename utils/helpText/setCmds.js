@@ -3,7 +3,7 @@ const { cyan } = require('chalk');
 const { format } = require('util');
 
 /* Internal modules */
-const { singleLineDivider } = require('../constants');
+const { SINGLE_BR } = require('../constants');
 const isNotFirst = require('../helpers/isNotFirst');
 
 module.exports = function setCmds(commands) {
@@ -16,14 +16,8 @@ module.exports = function setCmds(commands) {
 			? cyan(`  ${command}`)
 			: cyan(` ${command}`);
 
-		cmds =
-			cmds + format('%s', firstLine, ` ${cmd.desc}`, singleLineDivider);
+		cmds = cmds + format('%s', firstLine, ` ${cmd.desc}`, SINGLE_BR);
 	}
 
-	return format(
-		'%s',
-		`Commands:${singleLineDivider}`,
-		cmds,
-		singleLineDivider
-	);
+	return format('%s', `Commands:${SINGLE_BR}`, cmds, SINGLE_BR);
 };

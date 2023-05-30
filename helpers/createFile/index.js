@@ -1,7 +1,5 @@
 const { createSpinner } = require('nanospinner');
 
-const createMainFile = require('../createMainFile');
-const FileContent = require('../FileContent');
 const MainFile = require('../MainFile');
 const StyleFile = require('../StyleFile');
 const writeFile = require('../writeFile');
@@ -29,19 +27,16 @@ const createFile = async (
 	const styleImport = withStylesFile ? styleFile.fileImport : null;
 
 	const mainFileInfo = new MainFile({ name, styleImport, ts });
-
-	// const mainFile = await createMainFile({ ts });
-	// const content = new FileContent(name, { ts, cssMod, sass });
-	// const fileContent = content.get(ts);
+	const mainFile = mainFileInfo.get();
 
 	// /* create style file */
-	// await writeFile(`${path}/${styleFile.file}`);
+	await writeFile(`${path}/${styleFile.file}`);
 
-	// /* create create file */
-	// await writeFile(`${path}/${mainFile}`, fileContent);
-	// spinner.success({
-	// 	text: 'done ✨'
-	// });
+	/* create create file */
+	await writeFile(`${path}/${mainFile.file}`, mainFile.fileContent);
+	spinner.success({
+		text: 'done ✨'
+	});
 };
 
 module.exports = createFile;

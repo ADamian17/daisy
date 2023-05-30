@@ -3,9 +3,9 @@ const { format } = require('util');
 const { yellow, cyan, gray, green } = require('chalk');
 
 /* Internal modules */
-const { singleLineDivider, doubleLineDivider } = require('../constants');
 const setCmds = require('./setCmds');
 const setOpts = require('./setOpts');
+const { DOUBLE_BR, SINGLE_BR } = require('../constants');
 
 module.exports = function helpText({
 	name = `(CLI name undefined)`,
@@ -18,7 +18,7 @@ module.exports = function helpText({
 		green(name),
 		cyan('<command>'),
 		yellow('[option]'),
-		doubleLineDivider
+		DOUBLE_BR
 	);
 
 	const exampleOne = format(
@@ -39,12 +39,12 @@ module.exports = function helpText({
 		`"This command will disable the creation of files extension with scss"`
 	);
 
-	const examples = `${exampleOne}${singleLineDivider}${exampleTwo}`;
+	const examples = `${exampleOne}${SINGLE_BR}${exampleTwo}`;
 
 	const COMMANDS = setCmds(commands);
-	const EXAMPLE = format('%s', 'Example:', singleLineDivider, examples);
+	const EXAMPLE = format('%s', 'Example:', SINGLE_BR, examples);
 	const FLAGS = setOpts(flags);
-	const USAGE = format('%s', 'Usage:', singleLineDivider, usageStr);
+	const USAGE = format('%s', 'Usage:', SINGLE_BR, usageStr);
 
 	return `${USAGE}${COMMANDS}${FLAGS}${EXAMPLE}`;
 };

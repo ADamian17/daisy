@@ -1,7 +1,7 @@
-const doubleLineDivider = `\n\n`;
-const singleLineDivider = `\n`;
+const DOUBLE_BR = `\n\n`;
+const SINGLE_BR = `\n`;
 
 module.exports = {
-	doubleLineDivider,
-	singleLineDivider
+	DOUBLE_BR,
+	SINGLE_BR
 };

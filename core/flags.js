@@ -33,5 +33,10 @@ module.exports = {
 		default: true,
 		desc: `Create the files with .scss file extension`,
 		type: `boolean`
+	},
+	withStylesFile: {
+		default: true,
+		desc: `Creates the component with styles file`,
+		type: `boolean`
 	}
 };

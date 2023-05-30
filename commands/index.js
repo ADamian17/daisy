@@ -1,17 +1,7 @@
-const component = require('./component');
+const Command = require('../helpers/Command');
 
 module.exports = new Map([
-	['component', component],
-	[
-		'container',
-		flags => {
-			console.log(flags);
-		}
-	],
-	[
-		'template',
-		flags => {
-			console.log(flags);
-		}
-	]
+	['component', new Command()],
+	['container', new Command()],
+	['template', new Command()]
 ]);

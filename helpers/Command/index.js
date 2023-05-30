@@ -1,8 +1,8 @@
 const inquirer = require('inquirer');
-const setFilename = require('./setFilename');
-const { validateBaseDirPath, validateFilePath } = require('../utils');
-const createDirectory = require('./createDirectory');
-const createFile = require('./createFile');
+const setFilename = require('../setFilename');
+const { validateBaseDirPath, validateFilePath } = require('../../utils');
+const createDirectory = require('../createDirectory');
+const createFile = require('../createFile');
 
 module.exports = class Command {
 	#basePath;

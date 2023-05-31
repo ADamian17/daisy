@@ -3,6 +3,7 @@ const { createSpinner } = require('nanospinner');
 const MainFile = require('../MainFile');
 const StyleFile = require('../StyleFile');
 const writeFile = require('../writeFile');
+const FileName = require('../FileName');
 
 /**
  * @method init
@@ -21,7 +22,8 @@ const createFile = async (
 	{ ts, cssMod, sass, withStylesFile }
 ) => {
 	const spinner = createSpinner('...creating your files').start();
-
+	const pattern = /(\w+)-(\w)([\w-]*)/;
+	name = pattern.test(name) ? FileName.toPascalCase(name) : name;
 	const styleFileInfo = new StyleFile({ name, sass, cssMod });
 	const styleFile = styleFileInfo.get();
 	const styleImport = withStylesFile ? styleFile.fileImport : null;

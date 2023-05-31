@@ -12,7 +12,7 @@ const fcBody = (_, name) => {
 
 class FileContent {
 	constructor({ name, styleImport, ts }) {
-		this.name = FileName.toPascalCase(name);
+		this.name = name;
 		this.ts = ts;
 		this.firstLine = `import React from "react";`;
 		this.secondLine = this.setStyleImport(styleImport);

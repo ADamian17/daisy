@@ -1,7 +1,7 @@
 {
 	"name": "daisy-lite",
 	"description": "daisy makes your development easer, scaffolding some of the most repetitive task, like creating component, containers, templates, etc",
-	"version": "0.1.8",
+	"version": "0.1.9",
 	"license": "MIT",
 	"bin": {
 		"daisy": "index.js"
